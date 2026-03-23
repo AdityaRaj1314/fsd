@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Cross-Site Scripting (XSS) Example</title>
+    </head>
+    <body>
+        <h2>
+            enter your  name:
+        </h2>
+        <form method="POST">
+                {%  csrf_token %}
+                <input type="text" name="username">
+                <input type="submit" value="Submit">
+        </form>
+        {%  if  name %}
+        <h3>
+            Hello  {{name|safe}}
+        </h3>
+        {%  endif  %}
+    </body>
+</html>
