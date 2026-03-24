@@ -3,9 +3,8 @@ from django.db import models
 # Create your models here.
 class Student(models.Model):
     name=models.CharField(max_length=100)
-    usn=models.CharField(max_length=100)
+    usn=models.CharField(max_length=20)
     subject_code=models.CharField(max_length=20)
     cie_marks=models.IntegerField()
-
-    def  __str__(self):
+    def __str__(self):
         return self.name

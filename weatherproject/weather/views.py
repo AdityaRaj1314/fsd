@@ -4,7 +4,7 @@ from django.shortcuts import render
 import requests
 from django.shortcuts import render
 
-API_KEY = "YOUR_API_KEY_HERE"
+API_KEY = "001358509a4441871a95194d28f754c0"
 
 def home(request):
     weather_data = None
@@ -17,6 +17,7 @@ def home(request):
             f"https://api.openweathermap.org/data/2.5/weather"
             f"?q={city}&appid={API_KEY}&units=metric"
         )
+        
 
         response = requests.get(url)
         data = response.json()
