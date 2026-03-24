@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Student Feedback</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+input, textarea{
+    padding:8px;
+    margin:5px;
+}
+
+.feedback{
+    padding:10px;
+    margin:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Student Feedback Form</h2>
+
+<form id="feedbackForm">
+
+{% csrf_token %}
+
+<input type="text" id="name" placeholder="Enter Name" required><br>
+
+<textarea id="message" placeholder="Enter Feedback" required></textarea><br>
+
+<button type="submit">Submit Feedback</button>
+
+</form>
+
+<hr>
+
+<h3>Submitted Feedback</h3>
+
+<div id="feedbackList">
+
+{% for f in feedbacks %}
+
+<div class="feedback">
+<strong>{{ f.name }}</strong>: {{ f.message }}
+</div>
+
+{% endfor %}
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+// Highlight input fields on focus
+$("input, textarea").focus(function(){
+    $(this).css("background-color","#ffffcc");
+});
+
+$("input, textarea").blur(function(){
+    $(this).css("background-color","white");
+});
+
+// AJAX form submission
+$("#feedbackForm").submit(function(e){
+
+e.preventDefault();
+
+$.ajax({
+
+url:"/add_feedback/",
+type:"POST",
+
+data:{
+name:$("#name").val(),
+message:$("#message").val(),
+csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
+},
+
+success:function(response){
+
+// Add new feedback dynamically
+$("#feedbackList").append(
+
+"<div class='feedback'><strong>"+response.name+
+"</strong>: "+response.message+"</div>"
+
+);
+
+// jQuery effect
+$(".feedback:last").hide().fadeIn(800);
+
+// Clear form
+$("#feedbackForm")[0].reset();
+
+// Alternating colors
+$("#feedbackList .feedback:odd").css("background","#f2f2f2");
+$("#feedbackList .feedback:even").css("background","#d9edf7");
+
+}
+
+});
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Students with CIE < 20</title>
+</head>
+
+<body>
+
+<h2>Students with CIE Marks Less Than 20</h2>
+
+<table border="1">
+
+<tr>
+<th>USN</th>
+<th>Name</th>
+<th>Subject Code</th>
+<th>CIE Marks</th>
+</tr>
+
+{% for student in students %}
+
+<tr>
+<td>{{ student.usn }}</td>
+<td>{{ student.name }}</td>
+<td>{{ student.subject_code }}</td>
+<td>{{ student.cie_marks }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
