@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Management</title>
+</head>
+<body>
+    <h2>Placement Data Entry</h2>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST" action="{% url 'add_student' %}">
+        {% csrf_token %}
+        <label>USN:</label><br>
+        <input type="text" name="usn" required><br><br>
+
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Company Name:</label><br>
+        <input type="text" name="company_name" required><br><br>
+
+        <button type="submit">Submit Details</button>
+    </form>
+
+    <hr>
+
+    <h2>Students Placed in Amazon</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>USN</th>
+                <th>Name</th>
+                <th>Company Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for std in students %}
+            <tr>
+                <td>{{ std.usn }}</td>
+                <td>{{ std.name }}</td>
+                <td>{{ std.company_name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No students found placed in Amazon.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

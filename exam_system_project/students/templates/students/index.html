@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Management System</title>
+</head>
+<body>
+    <h2>Exam Management System - Add Student</h2>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST" action="{% url 'add_student' %}">
+        {% csrf_token %}
+        <label>Student Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>USN:</label><br>
+        <input type="text" name="usn" required><br><br>
+
+        <label>Course:</label><br>
+        <input type="text" name="course" required><br><br>
+
+        <label>Grade:</label><br>
+        <input type="text" name="grade" required><br><br>
+
+        <button type="submit">Submit Details</button>
+    </form>
+
+    <hr>
+
+    <h2>Students with "O" Grade</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>USN</th>
+                <th>Course</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for std in students %}
+            <tr>
+                <td>{{ std.name }}</td>
+                <td>{{ std.usn }}</td>
+                <td>{{ std.course }}</td>
+                <td>{{ std.grade }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No students found with "O" grade.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
