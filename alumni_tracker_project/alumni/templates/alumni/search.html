@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Alumni</title>
+</head>
+<body>
+    <h1>Search Alumni by Passing Year</h1>
+    <a href="{% url 'index' %}">Back to Add Alumni</a>
+    <br><br>
+
+    <form method="get" action="{% url 'search' %}">
+        <label for="year">Enter Passing Year:</label><br>
+        <input type="number" id="year" name="year" required><br><br>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if year %}
+        <h2>Results for Passing Year: {{ year }}</h2>
+        {% if alumni_list %}
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>USN</th>
+                    <th>Passing Year</th>
+                    <th>Company</th>
+                </tr>
+                {% for alumni in alumni_list %}
+                <tr>
+                    <td>{{ alumni.name }}</td>
+                    <td>{{ alumni.usn }}</td>
+                    <td>{{ alumni.passing_year }}</td>
+                    <td>{{ alumni.company }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No alumni found for the selected year.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

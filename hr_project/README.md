@@ -1,6 +1,6 @@
-# HelloWorld Project
+# HR Project
 
-This is a simple Django project designed for learning and basic output.
+This is a Django project designed to manage employee records and search based on salaries.
 
 ## How to Execute the Project
 
@@ -11,7 +11,7 @@ This is a simple Django project designed for learning and basic output.
    ```
 2. **Navigate to the Project Directory**:
    ```powershell
-   cd "helloworld"
+   cd "hr_project"
    ```
 3. **Run Database Migrations** (if you make changes to models):
    ```powershell
@@ -30,8 +30,8 @@ This is a simple Django project designed for learning and basic output.
 When working on this Django project, follow this standard structure:
 
 - **`manage.py`**: The command-line utility for administrative tasks (running server, migrations). Do not modify this file.
-- **`helloworld/settings.py`**: Add your created apps to `INSTALLED_APPS` here.
-- **`helloworld/urls.py`**: The main URL configuration. Route main paths here using `include('app_name.urls')`.
+- **`hr_project/settings.py`**: Add your created apps to `INSTALLED_APPS` here.
+- **`hr_project/urls.py`**: The main URL configuration. Route main paths here using `include('app_name.urls')`.
 - **`<app_name>/models.py`**: Define your database schema (Tables/Classes) here.
 - **`<app_name>/views.py`**: Write your core logic here. Handle user requests, interact with models, and render HTML templates.
 - **`<app_name>/urls.py`**: Define route endpoints specific to this app and map them to views.

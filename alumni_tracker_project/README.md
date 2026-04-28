@@ -1,6 +1,6 @@
-# HelloWorld Project
+# Alumni Tracker Project
 
-This is a simple Django project designed for learning and basic output.
+This is a Django project designed to track alumni details (Name, USN, Passing Year, Company) and filter them based on their graduation year.
 
 ## How to Execute the Project
 
@@ -11,7 +11,7 @@ This is a simple Django project designed for learning and basic output.
    ```
 2. **Navigate to the Project Directory**:
    ```powershell
-   cd "helloworld"
+   cd "alumni_tracker_project"
    ```
 3. **Run Database Migrations** (if you make changes to models):
    ```powershell
@@ -30,9 +30,9 @@ This is a simple Django project designed for learning and basic output.
 When working on this Django project, follow this standard structure:
 
 - **`manage.py`**: The command-line utility for administrative tasks (running server, migrations). Do not modify this file.
-- **`helloworld/settings.py`**: Add your created apps to `INSTALLED_APPS` here.
-- **`helloworld/urls.py`**: The main URL configuration. Route main paths here using `include('app_name.urls')`.
-- **`<app_name>/models.py`**: Define your database schema (Tables/Classes) here.
-- **`<app_name>/views.py`**: Write your core logic here. Handle user requests, interact with models, and render HTML templates.
-- **`<app_name>/urls.py`**: Define route endpoints specific to this app and map them to views.
-- **`<app_name>/templates/<app_name>/`**: Store all your HTML files inside this folder.
+- **`alumni_tracker_project/settings.py`**: Add your created apps (e.g., `alumni`) to `INSTALLED_APPS` here.
+- **`alumni_tracker_project/urls.py`**: The main URL configuration. Route main paths here using `include('alumni.urls')`.
+- **`alumni/models.py`**: Define your database schema (Tables/Classes like `Alumni`) here.
+- **`alumni/views.py`**: Write your core logic here. Handle user requests, interact with models, and render HTML templates.
+- **`alumni/urls.py`**: Define route endpoints specific to this app and map them to views.
+- **`alumni/templates/alumni/`**: Store all your HTML files (e.g., `index.html`, `search.html`) inside this folder.
