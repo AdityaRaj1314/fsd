@@ -1,31 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Grade</title>
 </head>
 <body>
-    <h1>Update Student Grade</h1>
-    <a href="{% url 'index' %}">Back to Home</a>
-    <br><br>
+    <h2>Update Student Grade</h2>
+    <a href="{% url 'index' %}">Back to Home</a><br><br>
 
-    <form method="post" action="{% url 'update_grade' %}">
+    <form method="POST" action="{% url 'update_grade' %}">
         {% csrf_token %}
-        <label for="name">Student Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="grade">New Grade:</label><br>
-        <input type="text" id="grade" name="grade" required><br><br>
-        
-        <button type="submit">Update Grade</button>
+        Student Name: <input type="text" name="name" required><br><br>
+        New Grade: <input type="text" name="grade" required><br><br>
+        <button type="submit">Update</button>
     </form>
 
     {% if updated_student %}
         {% if updated_student == 'Not Found' %}
-            <h3 style="color: red;">Student not found.</h3>
+            <p style="color: red;">Student not found.</p>
         {% else %}
-            <h3>Updated Results:</h3>
+            <h3>Updated Student Details</h3>
             <table border="1">
                 <tr>
                     <th>Name</th>
@@ -37,7 +30,7 @@
                     <td>{{ updated_student.name }}</td>
                     <td>{{ updated_student.usn }}</td>
                     <td>{{ updated_student.department }}</td>
-                    <td><strong style="color: green;">{{ updated_student.grade }}</strong></td>
+                    <td>{{ updated_student.grade }}</td>
                 </tr>
             </table>
         {% endif %}

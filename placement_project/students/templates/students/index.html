@@ -1,57 +1,69 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Placement Management</title>
-</head>
-<body>
-    <h2>Placement Data Entry</h2>
-
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-
-    <form method="POST" action="{% url 'add_student' %}">
-        {% csrf_token %}
-        <label>USN:</label><br>
-        <input type="text" name="usn" required><br><br>
-
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
-
-        <label>Company Name:</label><br>
-        <input type="text" name="company_name" required><br><br>
-
-        <button type="submit">Submit Details</button>
-    </form>
-
-    <hr>
-
-    <h2>Students Placed in Amazon</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>USN</th>
-                <th>Name</th>
-                <th>Company Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for std in students %}
-            <tr>
-                <td>{{ std.usn }}</td>
-                <td>{{ std.name }}</td>
-                <td>{{ std.company_name }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">No students found placed in Amazon.</td>
-            </tr>
+    <head>
+        <title>placemnet report</title>
+    </head>
+    <body>
+        <h2>
+            Placement compant add student
+        </h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: blue; font-weight: bold;">{{ message }}</p>
             {% endfor %}
-        </tbody>
-    </table>
-</body>
+        {% endif %}
+        <form method="POST" action="{%url 'add_student'%}">
+            {% csrf_token %}
+            <label>name :</label>
+            <input type="text" name="name" required><br><br>
+            <label>usn :</label>
+            <input type="text" name="usn" required> <br><br>
+            <label>company name</label>
+            <input type="text" name="company_name" required><br><br>
+            <button type="submit">submit</button>
+        </form>
+
+        <hr>
+
+        <h2>
+            Search Placements by Company
+        </h2>
+        <form method="GET" action="{% url 'index' %}">
+            <label>Company Name:</label>
+            <input type="text" name="company" value="{{ company }}">
+            <button type="submit">Search</button>
+            <a href="{% url 'index' %}">Clear</a>
+        </form>
+
+        <h2>
+            {% if company %}
+                Students placed in {{ company }}
+            {% else %}
+                All Students Placed
+            {% endif %}
+        </h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>
+                        NAME
+                    </th>
+                    <th>USN</th>
+                    <th>COMPANY NAME</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for std in students %}
+                <tr>
+                    <td>{{std.name}}</td>
+                    <td>{{std.usn}}</td>
+                    <td>{{std.company_name}}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">no student placed</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
 </html>

@@ -1,85 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Exam Fee Status</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        form { margin-bottom: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        .form-group { margin-bottom: 10px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input[type="text"], input[type="number"] { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button.delete { background-color: #dc3545; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .message { padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px; margin-bottom: 10px; }
-    </style>
+    <title>Student Exam Fee</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Student Exam Fee Management</h2>
+    <h2>Student Exam Fee Management</h2>
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="message">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
+    <form method="POST" action="{% url 'add_student' %}">
+        {% csrf_token %}
+        <h3>Add New Student</h3>
+        Name: <input type="text" name="name" required><br><br>
+        USN: <input type="text" name="usn" required><br><br>
+        Semester: <input type="number" name="semester" required min="1" max="8"><br><br>
+        Fee Status: 
+        <input type="checkbox" name="fee_paid" value="True"> Paid<br><br>
+        <button type="submit">Submit</button>
+    </form>
 
-        <form method="POST" action="{% url 'add_student' %}">
-            {% csrf_token %}
-            <h3>Add New Student</h3>
-            <div class="form-group">
-                <label>Student Name:</label>
-                <input type="text" name="name" required>
-            </div>
-            <div class="form-group">
-                <label>USN:</label>
-                <input type="text" name="usn" required>
-            </div>
-            <div class="form-group">
-                <label>Semester:</label>
-                <input type="number" name="semester" required min="1" max="8">
-            </div>
-            <div class="form-group">
-                <label>Exam Fee Status:</label>
-                <input type="checkbox" name="fee_paid" id="fee_paid" value="True">
-                <label for="fee_paid" style="display:inline; font-weight:normal;">Paid</label>
-            </div>
-            <button type="submit">Submit Data</button>
-        </form>
+    <br>
+    <form method="POST" action="{% url 'delete_unpaid' %}">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Delete all unpaid students?');">Delete Unpaid Students</button>
+    </form>
 
-        <form method="POST" action="{% url 'delete_unpaid' %}" style="display:inline; border:none; padding:0; margin-bottom:10px;">
-            {% csrf_token %}
-            <button type="submit" class="delete" onclick="return confirm('Are you sure you want to delete all students who have not paid?');">Delete Unpaid Students</button>
-        </form>
-
-        <h3>Students List</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>USN</th>
-                    <th>Semester</th>
-                    <th>Fee Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                <tr>
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.usn }}</td>
-                    <td>{{ student.semester }}</td>
-                    <td>{% if student.fee_paid %}Paid{% else %}Not Paid{% endif %}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4">No students found.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h3>Students List</h3>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>USN</th>
+            <th>Semester</th>
+            <th>Fee Status</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.usn }}</td>
+            <td>{{ student.semester }}</td>
+            <td>{% if student.fee_paid %}Paid{% else %}Not Paid{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No students found.</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

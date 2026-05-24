@@ -2,8 +2,6 @@ from django.shortcuts import render
 
 # Create your views here.
 import requests
-from django.shortcuts import render
-
 API_KEY = "001358509a4441871a95194d28f754c0"
 
 def home(request):

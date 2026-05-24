@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Grade Application</title>
 </head>
 <body>
-    <h1>Add New Student</h1>
-    <form method="post" action="{% url 'index' %}">
+    <h2>Add New Student</h2>
+    <form method="POST" action="{% url 'add_student' %}">
         {% csrf_token %}
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="usn">USN:</label><br>
-        <input type="text" id="usn" name="usn" required><br><br>
-        
-        <label for="department">Department:</label><br>
-        <input type="text" id="department" name="department" required><br><br>
-        
-        <label for="grade">Grade:</label><br>
-        <input type="text" id="grade" name="grade" required><br><br>
-        
+        Name: <input type="text" name="name" required><br><br>
+        USN: <input type="text" name="usn" required><br><br>
+        Department: <input type="text" name="department" required><br><br>
+        Grade: <input type="text" name="grade" required><br><br>
         <button type="submit">Submit</button>
     </form>
 
